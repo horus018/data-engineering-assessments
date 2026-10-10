@@ -1,0 +1,4 @@
+query,csv_mean_ms,parquet_unpartitioned_mean_ms,parquet_partitioned_mean_ms
+"Query 1: Monthly Revenue (Whole Period)",190.65,11.02,8.14
+"Query 2: Single Month Revenue & Items (2018-05)",171.30,6.94,3.07
+"Query 3: Top 5 Product Categories by Revenue",135.20,15.46,12.08

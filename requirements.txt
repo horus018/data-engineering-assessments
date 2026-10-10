@@ -1,0 +1,9 @@
+# Core Data Engineering Stack
+duckdb>=1.1.0
+pandas>=2.2.0
+pyarrow>=19.0.0
+
+# Defense Presentation & Visualization
+python-pptx>=1.0.0
+reportlab>=4.0.0
+matplotlib>=3.10.0

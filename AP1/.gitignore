@@ -1,0 +1,33 @@
+# Data source files and raw pipeline landings (never commit per brief)
+data/source/
+data/raw/
+**/data/source/
+**/data/raw/
+json_northmart_seller_profiles.json
+*.json
+
+# DuckDB database files
+*.duckdb
+*.duckdb.wal
+
+# Environment and secrets
+.env
+*.env
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

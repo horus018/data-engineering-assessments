@@ -1,0 +1,67 @@
+erDiagram
+    fact_sales }o--|| dim_date : "date_key"
+    fact_sales }o--|| dim_product : "product_key"
+    fact_sales }o--|| dim_customer : "customer_key"
+    fact_sales }o--|| dim_seller : "seller_key"
+
+    dim_date {
+        INTEGER date_key PK "Surrogate Key (YYYYMMDD)"
+        DATE date "Full calendar date"
+        INTEGER year "Calendar year (2016-2018)"
+        INTEGER month "Month number (1-12)"
+        INTEGER quarter "Quarter (1-4)"
+        INTEGER day "Day of month (1-31)"
+        VARCHAR day_of_week "Monday, Tuesday..."
+        VARCHAR month_name "January, February..."
+        VARCHAR year_month "Partition key (YYYY-MM)"
+        BOOLEAN is_weekend "True if Saturday/Sunday"
+    }
+
+    dim_product {
+        INTEGER product_key PK "Surrogate Key"
+        VARCHAR product_id "Natural Key (UUID)"
+        VARCHAR category_name "Translated English category (or unknown)"
+        VARCHAR category_name_pt "Original Portuguese category"
+        INTEGER name_length "Product name character count"
+        INTEGER description_length "Description character length"
+        INTEGER photos_qty "Product gallery photo count"
+        DOUBLE weight_g "Product weight in grams"
+        DOUBLE length_cm "Product length"
+        DOUBLE height_cm "Product height"
+        DOUBLE width_cm "Product width"
+    }
+
+    dim_customer {
+        INTEGER customer_key PK "Surrogate Key"
+        VARCHAR customer_id "Natural Key (Order token)"
+        VARCHAR customer_unique_id "Customer master UUID"
+        INTEGER zip_code_prefix "Postal code prefix"
+        VARCHAR city "Customer city"
+        VARCHAR state "State abbreviation (SP, RJ...)"
+    }
+
+    dim_seller {
+        INTEGER seller_key PK "Surrogate Key"
+        VARCHAR seller_id "Natural Key (UUID)"
+        INTEGER zip_code_prefix "Postal code prefix"
+        VARCHAR city "Seller city"
+        VARCHAR state "State abbreviation (SP, PR...)"
+        VARCHAR tier "Normalized tier (bronze, silver, gold, unknown)"
+        DATE joined_on "Seller registration date"
+        BIGINT handling_days "Dispatch SLA days (-1 if unknown)"
+    }
+
+    fact_sales {
+        INTEGER date_key FK "References dim_date"
+        VARCHAR year_month "Partition key (YYYY-MM)"
+        INTEGER product_key FK "References dim_product"
+        INTEGER customer_key FK "References dim_customer"
+        INTEGER seller_key FK "References dim_seller"
+        VARCHAR order_id "Degenerate dimension"
+        INTEGER order_item_id "Degenerate dimension"
+        VARCHAR order_status "Degenerate dimension (delivered, shipped...)"
+        DOUBLE price "Additive measure: unit sale price"
+        DOUBLE freight_value "Additive measure: shipping cost"
+        DOUBLE total_item_value "Additive measure: price + freight"
+        INTEGER quantity "Additive measure: constant 1 unit"
+    }

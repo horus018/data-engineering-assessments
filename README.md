@@ -1,7 +1,6 @@
 # Data Engineering Practical Assessments (2026/2027)
 
-**Institution**: Instituto Politécnico de Bragança (IPB / UPB)  
-**Author**: Lucas Alves Rubira ([@horus018](https://github.com/horus018))  
+**Institution**: Universidade Politécnica de Bragança (UPB)  
 **Academic Year**: 2026/2027  
 **Course**: Data Engineering  
 
@@ -87,6 +86,7 @@ python3 src/build_presentation.py
 ```
 
 For complete documentation, analysis of findings, architectural justifications, and the oral defense study guide, see:
+
 - [`AP1/README.md`](file:///home/zatrion/ER/AP1/README.md)
 - [`AP1/STUDY_GUIDE.md`](file:///home/zatrion/ER/AP1/STUDY_GUIDE.md)
 - [`AP1/presentation.pdf`](file:///home/zatrion/ER/AP1/presentation.pdf)

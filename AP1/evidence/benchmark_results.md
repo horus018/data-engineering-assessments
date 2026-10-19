@@ -17,9 +17,9 @@
 
 | Analytical Query | Raw CSV Layout | Parquet Unpartitioned | Parquet Partitioned | Speedup vs CSV |
 | :--- | :---: | :---: | :---: | :---: |
-| **Query 1: Monthly Revenue (Whole Period)** | 190.65 ms | 11.02 ms | **8.14 ms** | **23.4x faster** |
-| **Query 2: Single Month Revenue & Items (2018-05)** | 171.30 ms | 6.94 ms | **3.07 ms** | **55.9x faster** |
-| **Query 3: Top 5 Product Categories by Revenue** | 135.20 ms | 15.46 ms | **12.08 ms** | **11.2x faster** |
+| **Query 1: Monthly Revenue (Whole Period)** | 178.47 ms | 8.85 ms | **7.51 ms** | **23.8x faster** |
+| **Query 2: Single Month Revenue & Items (2018-05)** | 160.23 ms | 6.32 ms | **3.18 ms** | **50.4x faster** |
+| **Query 3: Top 5 Product Categories by Revenue** | 134.85 ms | 13.96 ms | **11.42 ms** | **11.8x faster** |
 
 ---
 

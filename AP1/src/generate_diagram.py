@@ -168,5 +168,6 @@ def create_star_schema_diagram(output_path: str):
     print(f"Diagram successfully saved to {output_path}")
 
 if __name__ == "__main__":
-    out = "/home/zatrion/ER/AP1/architecture/star_schema.png"
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    out = os.path.join(base_dir, "architecture", "star_schema.png")
     create_star_schema_diagram(out)

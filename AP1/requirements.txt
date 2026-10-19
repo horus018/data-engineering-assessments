@@ -7,3 +7,4 @@ pyarrow>=19.0.0
 python-pptx>=1.0.0
 reportlab>=4.0.0
 matplotlib>=3.10.0
+panda

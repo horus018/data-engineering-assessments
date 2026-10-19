@@ -200,4 +200,5 @@ def run_benchmarks(base_dir: str):
     con.close()
 
 if __name__ == "__main__":
-    run_benchmarks("/home/zatrion/ER/AP1")
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    run_benchmarks(base_dir)

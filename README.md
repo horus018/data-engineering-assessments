@@ -87,6 +87,6 @@ python3 src/build_presentation.py
 
 For complete documentation, analysis of findings, architectural justifications, and the oral defense study guide, see:
 
-- [`AP1/README.md`](file:///home/zatrion/ER/AP1/README.md)
-- [`AP1/STUDY_GUIDE.md`](file:///home/zatrion/ER/AP1/STUDY_GUIDE.md)
-- [`AP1/presentation.pdf`](file:///home/zatrion/ER/AP1/presentation.pdf)
+- [`AP1/README.md`](file:///home/zatrion/ED/AP1/README.md)
+- [`AP1/STUDY_GUIDE.md`](file:///home/zatrion/ED/AP1/STUDY_GUIDE.md)
+- [`AP1/presentation.pdf`](file:///home/zatrion/ED/AP1/presentation.pdf)

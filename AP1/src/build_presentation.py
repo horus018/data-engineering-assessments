@@ -213,7 +213,8 @@ def build_presentation(output_pptx: str):
 
     # Right: Schema Diagram Image
     create_card(s4, Inches(6.8), Inches(1.5), Inches(5.7), Inches(5.3))
-    diagram_img = "/home/zatrion/ER/AP1/architecture/star_schema.png"
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    diagram_img = os.path.join(base_dir, "architecture", "star_schema.png")
     if os.path.exists(diagram_img):
         s4.shapes.add_picture(diagram_img, Inches(7.0), Inches(1.7), width=Inches(5.3))
 
@@ -396,5 +397,6 @@ def build_presentation(output_pptx: str):
     print(f"PDF successfully generated at {pdf_path}")
 
 if __name__ == "__main__":
-    pptx_path = "/home/zatrion/ER/AP1/presentation.pptx"
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    pptx_path = os.path.join(base_dir, "presentation.pptx")
     build_presentation(pptx_path)

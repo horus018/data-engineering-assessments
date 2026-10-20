@@ -40,7 +40,6 @@ build_presentation.py
 
 # Student oral defense preparation guides & demo scripts (not submitted)
 STUDY_GUIDE.md
-VIDEO_SCRIPT.md
 
 # Packaging and submission zips
 *.zip

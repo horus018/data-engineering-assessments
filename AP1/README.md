@@ -185,6 +185,7 @@ The fact table was exported to Parquet under two physical storage layouts:
 ### Benchmarking Methodology
 - **Execution Platform**: DuckDB v1.1.3 running on Linux x86_64.
 - **Isolation**: Each layout was queried 6 consecutive times; the initial run was discarded as a warm-up, and the subsequent 5 iterations were recorded using high-precision hardware clocks (`time.perf_counter()`).
+- **Run-to-run variability**: Absolute timings vary by a few ms between runs (OS cache, background load); the demo video shows a separate run with the same relative results (CSV ≈ 160–180 ms vs partitioned Parquet ≈ 3–8 ms). Storage sizes are deterministic.
 - **Performance Rationale**:
   - **Column Projection**: Queries touch only 2–3 columns (`price`, `quantity`, `date_key`). Parquet ignores unreferenced columns entirely, whereas CSV must read every byte line-by-line.
   - **Partition Pruning**: In Query 2, partitioned Parquet skips 23 out of 24 directories based on metadata, reading only the `year_month=2018-05` directory and finishing in **3.18 ms**.

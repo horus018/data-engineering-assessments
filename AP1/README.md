@@ -156,10 +156,10 @@ The fact table was exported to Parquet under two physical storage layouts:
 
 | Storage Layout | Format & Details | Disk Size (MB) | Raw Byte Count | Space Reduction vs Full Raw |
 | :--- | :--- | :---: | :---: | :---: |
-| **Full Raw Source** | 9 CSV files + 1 JSON file | **121.40 MB** | 127,294,000 | Baseline (100%) |
-| **Core Query CSVs** | Items + Orders + Products + Translation | **33.83 MB** | 35,475,642 | Baseline Core |
+| **Full Raw Source** | 9 CSV files + 1 JSON file | **121.40 MB** | 127,293,345 | Baseline (100%) |
+| **Core Query CSVs** | Items + Orders + Products + Translation | **33.83 MB** | 35,475,644 | Baseline Core |
 | **Parquet Unpartitioned** | Single file (`fact_sales.parquet`, ZSTD) | **3.49 MB** | 3,658,370 | **-97.1%** |
-| **Parquet Partitioned** | Partitioned by `year_month` (24 folders) | **3.63 MB** | 3,806,208 | **-97.0%** |
+| **Parquet Partitioned** | Partitioned by `year_month` (24 folders) | **3.63 MB** | 3,809,565 | **-97.0%** |
 
 *Takeaway: Columnar encoding combined with ZSTD compression reduces storage footprint by over 97% compared to raw source files.*
 
@@ -167,9 +167,11 @@ The fact table was exported to Parquet under two physical storage layouts:
 
 | Query | Raw CSV Layout | Parquet Unpartitioned | Parquet Partitioned | Speedup (vs CSV) |
 | :--- | :---: | :---: | :---: | :---: |
-| **Query 1: Monthly Revenue (Whole Period)** | 190.65 ms (±5.88) | 11.02 ms (±0.93) | **8.14 ms (±1.76)** | **23.4x faster** |
-| **Query 2: Single Month Revenue & Items (2018-05)** | 171.30 ms (±7.64) | 6.94 ms (±1.80) | **3.07 ms (±0.67)** | **55.8x faster** |
-| **Query 3: Top 5 Product Categories by Revenue** | 135.20 ms (±2.92) | 15.46 ms (±3.17) | **12.08 ms (±0.81)** | **11.2x faster** |
+| **Query 1: Monthly Revenue (Whole Period)** | 178.47 ms | 8.85 ms | **7.51 ms** | **23.8x faster** |
+| **Query 2: Single Month Revenue & Items (2018-05)** | 160.23 ms | 6.32 ms | **3.18 ms** | **50.4x faster** |
+| **Query 3: Top 5 Product Categories by Revenue** | 134.85 ms | 13.96 ms | **11.42 ms** | **11.8x faster** |
+
+*Raw measurements: [`evidence/benchmark_table.csv`](evidence/benchmark_table.csv) · Full analysis: [`evidence/benchmark_results.md`](evidence/benchmark_results.md)*
 
 ### Benchmark Query Results
 - **Query 2 Output (`2018-05`)**: Revenue = `$996,517.68`, Item Count = `7,925 items`.
@@ -185,7 +187,7 @@ The fact table was exported to Parquet under two physical storage layouts:
 - **Isolation**: Each layout was queried 6 consecutive times; the initial run was discarded as a warm-up, and the subsequent 5 iterations were recorded using high-precision hardware clocks (`time.perf_counter()`).
 - **Performance Rationale**:
   - **Column Projection**: Queries touch only 2–3 columns (`price`, `quantity`, `date_key`). Parquet ignores unreferenced columns entirely, whereas CSV must read every byte line-by-line.
-  - **Partition Pruning**: In Query 2, partitioned Parquet skips 23 out of 24 directories based on metadata, reading only the `year_month=2018-05` directory and finishing in **3.07 ms**.
+  - **Partition Pruning**: In Query 2, partitioned Parquet skips 23 out of 24 directories based on metadata, reading only the `year_month=2018-05` directory and finishing in **3.18 ms**.
 
 ---
 
@@ -197,7 +199,7 @@ The fact table was exported to Parquet under two physical storage layouts:
 > 
 > First, our measurements demonstrate that Parquet compression slashes storage from 121.4 MB across raw files to 3.49 MB—a **97.1% storage reduction**. Storing data in open object storage avoids the excessive licensing and proprietary storage expenses of a traditional cloud data warehouse for NorthMart’s moderate 112k-row volume.
 > 
-> Second, query execution latencies dropped from 171.30 ms in raw CSV to **3.07 ms in partitioned Parquet** (a **55.8x speedup** via partition pruning). A pure data lake lacks ACID transactions, schema enforcement, and table management (risking a "data swamp"). A lakehouse delivers open-format storage efficiency, ACID reliability, and near-instant local SQL querying without vendor lock-in.
+> Second, query execution latencies dropped from 160.23 ms in raw CSV to **3.18 ms in partitioned Parquet** (a **50.4x speedup** via partition pruning). A pure data lake lacks ACID transactions, schema enforcement, and table management (risking a "data swamp"). A lakehouse delivers open-format storage efficiency, ACID reliability, and near-instant local SQL querying without vendor lock-in.
 
 *(Word count: 128 words — strictly compliant with the 150-word ceiling).*
 

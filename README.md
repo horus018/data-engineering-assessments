@@ -14,10 +14,7 @@ This repository hosts the practical coursework platform developed across three s
 project/
 ├── AP1/                        # Assessment 1: Storage formats & analytical modelling (ACTIVE)
 │   ├── README.md               # Written answers, profiling, Kimball modelling, benchmarks & Lakehouse evaluation
-│   ├── STUDY_GUIDE.md          # Comprehensive oral defense preparation guide with keywords
-│   ├── presentation.pptx       # Defense presentation slide deck (16:9 widescreen)
-│   ├── presentation.pdf        # Defense presentation exported as PDF
-│   ├── requirements.txt        # Pinned dependencies (DuckDB, Pandas, PyArrow, etc.)
+│   ├── requirements.txt        # Pinned dependencies (DuckDB, Pandas, PyArrow, Matplotlib)
 │   ├── .gitignore              # Ignores raw sources, DuckDB files, environment secrets
 │   ├── architecture/           # Star schema diagram (PNG and Mermaid)
 │   ├── data/
@@ -29,8 +26,7 @@ project/
 │   │   └── benchmark.sql       # Task 4: Analytical benchmark queries across layouts
 │   ├── src/
 │   │   ├── run_benchmark.py    # Automated timing harness across CSV and Parquet
-│   │   ├── generate_diagram.py # Star schema PNG diagram generator
-│   │   └── build_presentation.py # Defense presentation generator
+│   │   └── generate_diagram.py # Star schema PNG diagram generator
 │   ├── tests/
 │   │   ├── test_referential_integrity.sql # SQL referential assertions
 │   │   └── run_tests.py        # Automated test execution script
@@ -80,13 +76,8 @@ python3 src/run_benchmark.py
 
 # 6. Run automated referential integrity assertions
 python3 tests/run_tests.py
-
-# 7. Generate defense presentation (PPTX and PDF)
-python3 src/build_presentation.py
 ```
 
-For complete documentation, analysis of findings, architectural justifications, and the oral defense study guide, see:
+For complete documentation, analysis of findings, and architectural justifications, see:
 
-- [`AP1/README.md`](file:///home/zatrion/ED/AP1/README.md)
-- [`AP1/STUDY_GUIDE.md`](file:///home/zatrion/ED/AP1/STUDY_GUIDE.md)
-- [`AP1/presentation.pdf`](file:///home/zatrion/ED/AP1/presentation.pdf)
+- [AP1/README.md](AP1/README.md)

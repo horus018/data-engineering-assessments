@@ -168,6 +168,9 @@ def create_star_schema_diagram(output_path: str):
     print(f"Diagram successfully saved to {output_path}")
 
 if __name__ == "__main__":
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    out = os.path.join(base_dir, "architecture", "star_schema.png")
-    create_star_schema_diagram(out)
+    from pathlib import Path
+    import sys
+    base_dir = Path(__file__).resolve().parent.parent
+    default_out = base_dir / "architecture" / "star_schema.png"
+    out_path = sys.argv[1] if len(sys.argv) > 1 else str(default_out)
+    create_star_schema_diagram(out_path)

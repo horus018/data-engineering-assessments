@@ -232,34 +232,26 @@ From the `AP1/` folder:
    ```bash
    python3 tests/run_tests.py
    ```
-5. **Generate Presentation Deck (PPTX & PDF)**:
-   ```bash
-   python3 src/build_presentation.py
-   ```
 
 ---
 
-## 7. Deliverable File Manifest
+## 7. Deliverable File Manifest (Student Brief §2.1.3)
 
 | Repository Path | Description |
 | :--- | :--- |
 | `README.md` | Academic submission report answering Tasks 1–5 |
-| `STUDY_GUIDE.md` | Comprehensive oral defense preparation guide with keywords |
-| `presentation.pptx` | 16:9 defense slide presentation |
-| `presentation.pdf` | PDF export of defense slides |
-| `sql/profiling.sql` | DuckDB raw data profiling script |
-| `sql/build_model.sql` | End-to-end star schema ETL & Parquet export script |
-| `sql/benchmark.sql` | The 3 benchmark queries across all 3 layouts |
-| `src/run_benchmark.py` | Benchmark timing & measurement harness |
-| `src/generate_diagram.py` | Generates high-res star schema PNG diagram |
-| `src/build_presentation.py`| Python script generating PPTX and converting to PDF |
-| `architecture/star_schema.png` | Visual schema diagram (Dark theme) |
-| `architecture/star_schema.mmd` | Mermaid source definition of schema |
-| `data/curated/fact_sales.parquet` | Unpartitioned curated Parquet output |
-| `data/curated/fact_sales_partitioned/`| Partitioned Parquet directory layout |
+| `sql/profiling.sql` | DuckDB raw data profiling script (Task 1) |
+| `architecture/star_schema.png` | Visual schema diagram (Dark theme, Task 2) |
+| `architecture/star_schema.mmd` | Mermaid source definition of schema (Task 2) |
+| `sql/build_model.sql` | End-to-end star schema ETL & Parquet export script (Task 3) |
+| `sql/benchmark.sql` | The 3 benchmark queries across all 3 layouts (Task 4) |
+| `src/run_benchmark.py` | Benchmark timing & measurement harness (Task 4) |
+| `src/generate_diagram.py` | Generates star schema PNG diagram |
+| `data/curated/fact_sales.parquet` | Unpartitioned curated Parquet output (Task 4) |
+| `data/curated/fact_sales_partitioned/`| Partitioned Parquet directory layout (Task 4) |
+| `evidence/benchmark_results.md` | Benchmark table and analysis (Task 4) |
+| `evidence/benchmark_table.csv` | Raw timing measurements table (Task 4) |
 | `tests/test_referential_integrity.sql`| SQL referential integrity test assertions |
 | `tests/run_tests.py` | Automated test runner script |
-| `evidence/benchmark_results.md` | Benchmark table and analysis |
-| `evidence/benchmark_table.csv` | Raw timing measurements |
 | `evidence/profiling_output.txt` | Captured stdout from DuckDB profiling |
 | `evidence/referential_checks_output.txt`| Captured stdout from referential tests |

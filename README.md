@@ -37,7 +37,6 @@ project/
 │       └── referential_checks_output.txt # Integrity check logs
 ├── AP2/                        # Assessment 2: Orchestrated and tested ELT pipeline (Airflow + dbt)
 ├── AP3/                        # Assessment 3: Data protection & tool exploration (GDPR erasure + Spark/Kafka)
-├── json_northmart_seller_profiles.json # Root copy of operational seller profiles
 ├── requirements.txt            # Global project requirements
 └── .gitignore                  # Global repository gitignore
 ```

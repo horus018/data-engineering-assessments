@@ -215,6 +215,8 @@ The fact table was exported to Parquet under two physical storage layouts:
   ```bash
   pip install -r requirements.txt
   ```
+- **Raw data (not included in this submission, per the brief)**: download the 9 CSV files of the [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) and the course file `northmart_seller_profiles.json`, and place them, with their original file names, in `AP1/data/source/`.
+- The curated Parquet outputs are already included in `data/curated/`, so the benchmark queries can be inspected without rebuilding.
 
 ### Step-by-Step Execution
 From the `AP1/` folder:

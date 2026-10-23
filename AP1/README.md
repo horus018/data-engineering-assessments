@@ -3,6 +3,7 @@
 **Institution**: Instituto Politécnico de Bragança (IPB) / UPB  
 **Course Unit**: Data Engineering (2026/2027)  
 **Deliverable**: Practical Assessment 1 (PA1) — NorthMart Marketplace Dimensional Analytical Layer  
+**Group**: Lucas Alves Rubira (a67707) · Dorota Dudkowiak (m324637) · Aye Khine Lwin (a70733)  
 
 ---
 

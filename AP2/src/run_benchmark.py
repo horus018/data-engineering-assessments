@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-NorthMart Data Platform - PA1 Task 4 Benchmark Suite
+NorthMart Data Platform - AP1 Task 4 Benchmark Suite
 Measures file storage footprints and query execution latencies across:
   1. Raw CSV Layout
   2. Curated Parquet Unpartitioned Layout
@@ -46,17 +46,13 @@ def run_benchmarks(base_dir: str):
     fact_parquet_bytes = get_dir_size(os.path.join(base_dir, "data/curated/fact_sales.parquet"))
     fact_partitioned_bytes = get_dir_size(os.path.join(base_dir, "data/curated/fact_sales_partitioned"))
 
-    print("================================================================================")
-    print("                    STORAGE SIZE MEASUREMENTS (TASK 4)                          ")
-    print("================================================================================")
+    print("STORAGE SIZE MEASUREMENTS (TASK 4)")
     print(f"Total Raw Source Files (9 CSVs + 1 JSON) : {total_raw_source_bytes / (1024*1024):.2f} MB")
     print(f"Core Query CSVs (Items + Orders + Prods)  : {core_csv_query_bytes / (1024*1024):.2f} MB")
     print(f"Curated Parquet (Unpartitioned)          : {fact_parquet_bytes / (1024*1024):.2f} MB")
     print(f"Curated Parquet (Partitioned by Month)   : {fact_partitioned_bytes / (1024*1024):.2f} MB")
     print(f"Storage Reduction (Parquet vs Core CSVs) : {(1 - fact_parquet_bytes / core_csv_query_bytes) * 100:.1f}%")
     print(f"Storage Reduction (Parquet vs Full Raw)  : {(1 - fact_parquet_bytes / total_raw_source_bytes) * 100:.1f}%")
-    print("================================================================================\n")
-
     # 2. Define Queries
     queries = {
         "Query 1: Monthly Revenue (Whole Period)": {
@@ -147,7 +143,7 @@ def run_benchmarks(base_dir: str):
         results.append(row)
 
     # 4. Generate Output Markdown Table
-    md_content = f"""# NorthMart PA1 Task 4: Storage & Performance Benchmark Results
+    md_content = f"""# NorthMart AP1 Task 4: Storage & Performance Benchmark Results
 
 ## 1. Storage Footprint Comparison
 

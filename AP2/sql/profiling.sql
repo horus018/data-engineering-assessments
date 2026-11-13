@@ -1,14 +1,10 @@
--- ============================================================================
--- NorthMart Data Platform - PA1 Task 1: Raw Data Profiling
+-- NorthMart Data Platform - AP1 Task 1: Raw Data Profiling
 -- Engine: DuckDB
 -- Description: Comprehensive profiling of raw CSV exports and JSON seller profiles.
 -- Evaluates row counts, primary key uniqueness, null rates, duplicate records,
 -- and cross-dataset referential integrity.
--- ============================================================================
 
--- ----------------------------------------------------------------------------
 -- 1. Create Views Over Raw Source Files
--- ----------------------------------------------------------------------------
 CREATE OR REPLACE VIEW raw_orders AS 
 SELECT * FROM read_csv_auto('data/source/olist_orders_dataset.csv');
 
@@ -40,10 +36,8 @@ CREATE OR REPLACE VIEW raw_sellers_json AS
 SELECT * FROM read_json_auto('data/source/northmart_seller_profiles.json');
 
 
--- ----------------------------------------------------------------------------
 -- 2. Global Dataset Row Counts
--- ----------------------------------------------------------------------------
-SELECT '=== 1. GLOBAL ROW COUNTS ===' AS section;
+SELECT ' 1. GLOBAL ROW COUNTS ' AS section;
 
 SELECT 'orders' AS dataset, COUNT(*) AS row_count FROM raw_orders
 UNION ALL
@@ -66,10 +60,8 @@ UNION ALL
 SELECT 'category_translation', COUNT(*) FROM raw_category_translation;
 
 
--- ----------------------------------------------------------------------------
 -- 3. Primary Key Uniqueness and Duplicate Checks
--- ----------------------------------------------------------------------------
-SELECT '=== 2. PRIMARY KEY UNIQUENESS & DUPLICATE CHECKS ===' AS section;
+SELECT ' 2. PRIMARY KEY UNIQUENESS & DUPLICATE CHECKS ' AS section;
 
 SELECT 
     'orders' AS entity,
@@ -128,10 +120,8 @@ SELECT
 FROM raw_reviews;
 
 
--- ----------------------------------------------------------------------------
 -- 4. Deep Inspection of JSON Seller Profiles (Concrete Findings)
--- ----------------------------------------------------------------------------
-SELECT '=== 3. JSON SELLER PROFILES DEEP INSPECTION ===' AS section;
+SELECT ' 3. JSON SELLER PROFILES DEEP INSPECTION ' AS section;
 
 -- Finding 1: Duplicate seller records and multiple updated_at timestamps
 SELECT 
@@ -163,10 +153,8 @@ SELECT
 FROM raw_sellers_json;
 
 
--- ----------------------------------------------------------------------------
 -- 5. Cross-Dataset Referential Consistency (CSV vs JSON Sellers)
--- ----------------------------------------------------------------------------
-SELECT '=== 4. CSV VS JSON SELLERS RECONCILIATION ===' AS section;
+SELECT ' 4. CSV VS JSON SELLERS RECONCILIATION ' AS section;
 
 SELECT 
     (SELECT COUNT(DISTINCT seller_id) FROM raw_sellers) AS sellers_in_csv,
@@ -181,10 +169,8 @@ SELECT
      WHERE s.seller_id IS NULL) AS json_sellers_missing_in_csv;
 
 
--- ----------------------------------------------------------------------------
 -- 6. Null Rate Analysis in Core Tables
--- ----------------------------------------------------------------------------
-SELECT '=== 5. NULL RATE ANALYSIS IN ORDERS & PRODUCTS ===' AS section;
+SELECT ' 5. NULL RATE ANALYSIS IN ORDERS & PRODUCTS ' AS section;
 
 SELECT 
     'orders' AS table_name,
@@ -207,10 +193,8 @@ SELECT
 FROM raw_products;
 
 
--- ----------------------------------------------------------------------------
 -- 7. Referential Integrity Check of Order Items against Entities
--- ----------------------------------------------------------------------------
-SELECT '=== 6. FOREIGN KEY INTEGRITY IN RAW ORDER ITEMS ===' AS section;
+SELECT ' 6. FOREIGN KEY INTEGRITY IN RAW ORDER ITEMS ' AS section;
 
 SELECT 
     'order_items -> orders' AS fk_relation,

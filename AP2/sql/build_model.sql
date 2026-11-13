@@ -1,5 +1,4 @@
--- ============================================================================
--- NorthMart Data Platform - PA1 Task 3: Dimensional Model Build
+-- NorthMart Data Platform - AP1 Task 3: Dimensional Model Build
 -- Engine: DuckDB
 -- Description: Builds the Kimball star schema from raw CSV and JSON files.
 -- Features:
@@ -11,11 +10,8 @@
 --   - Surrogate keys across all dimensions
 --   - Automated referential integrity validation checks
 --   - Exports fact table to unpartitioned and partitioned Parquet layouts
--- ============================================================================
 
--- ----------------------------------------------------------------------------
 -- 1. Create Source Views
--- ----------------------------------------------------------------------------
 CREATE OR REPLACE VIEW raw_orders AS 
 SELECT * FROM read_csv_auto('data/source/olist_orders_dataset.csv');
 
@@ -38,9 +34,7 @@ CREATE OR REPLACE VIEW raw_sellers_json AS
 SELECT * FROM read_json_auto('data/source/northmart_seller_profiles.json');
 
 
--- ----------------------------------------------------------------------------
 -- 2. Build Dimension Tables
--- ----------------------------------------------------------------------------
 
 -- 2.1 Date Dimension (dim_date)
 -- Spans full order history range from 2016 to 2018 with rich calendar attributes
@@ -116,10 +110,8 @@ LEFT JOIN (
 ) j ON s.seller_id = j.seller_id;
 
 
--- ----------------------------------------------------------------------------
 -- 3. Build Fact Table (fact_sales)
 -- Grain: One row per line item within an order placed on NorthMart marketplace
--- ----------------------------------------------------------------------------
 CREATE OR REPLACE TABLE fact_sales AS
 SELECT
     CAST(strftime(o.order_purchase_timestamp, '%Y%m%d') AS INTEGER) AS date_key,
@@ -141,10 +133,8 @@ JOIN dim_customer c ON o.customer_id = c.customer_id
 JOIN dim_seller s ON oi.seller_id = s.seller_id;
 
 
--- ----------------------------------------------------------------------------
 -- 4. Automated Referential Integrity Checks
--- ----------------------------------------------------------------------------
-SELECT '=== REFERENTIAL INTEGRITY CHECKS (MUST BE 0 VIOLATIONS) ===' AS check_status;
+SELECT ' REFERENTIAL INTEGRITY CHECKS (MUST BE 0 VIOLATIONS) ' AS check_status;
 
 SELECT 
     'fact_sales -> dim_date' AS fk_relationship,
@@ -185,10 +175,8 @@ LEFT JOIN dim_seller s ON f.seller_key = s.seller_key
 WHERE s.seller_key IS NULL;
 
 
--- ----------------------------------------------------------------------------
 -- 5. Export Fact Table to Parquet Layouts (Task 4 Curated Storage)
--- ----------------------------------------------------------------------------
-SELECT '=== EXPORTING CURATED PARQUET LAYOUTS ===' AS export_status;
+SELECT ' EXPORTING CURATED PARQUET LAYOUTS ' AS export_status;
 
 -- 5.1 Export Unpartitioned Parquet
 COPY fact_sales TO 'data/curated/fact_sales.parquet' 

@@ -1,0 +1,52 @@
+[0m12:05:56  Running with dbt=1.12.6
+[0m12:05:56  Registered adapter: duckdb=1.11.1
+[0m12:05:56  Found 2 models, 20 data tests, 5 sources, 512 macros
+[0m12:05:56  
+[0m12:05:56  Concurrency: 1 threads (target='dev')
+[0m12:05:56  
+[0m12:05:56  1 of 20 START test accepted_range_stg_orders_freight_value__10000_0__0_0 ....... [RUN]
+[0m12:05:57  1 of 20 PASS accepted_range_stg_orders_freight_value__10000_0__0_0 ............. [[32mPASS[0m in 0.05s]
+[0m12:05:57  2 of 20 START test accepted_range_stg_orders_price__50000_0__0_01 .............. [RUN]
+[0m12:05:57  2 of 20 PASS accepted_range_stg_orders_price__50000_0__0_01 .................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  3 of 20 START test accepted_values_stg_orders_order_status__delivered__shipped__canceled__invoiced__processing__created__approved__unavailable  [RUN]
+[0m12:05:57  3 of 20 PASS accepted_values_stg_orders_order_status__delivered__shipped__canceled__invoiced__processing__created__approved__unavailable  [[32mPASS[0m in 0.05s]
+[0m12:05:57  4 of 20 START test assert_valid_marketplace_order_economics .................... [RUN]
+[0m12:05:57  4 of 20 PASS assert_valid_marketplace_order_economics .......................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  5 of 20 START test not_null_stg_orders_customer_id ............................. [RUN]
+[0m12:05:57  5 of 20 PASS not_null_stg_orders_customer_id ................................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  6 of 20 START test not_null_stg_orders_date_key ................................ [RUN]
+[0m12:05:57  6 of 20 PASS not_null_stg_orders_date_key ...................................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  7 of 20 START test not_null_stg_orders_freight_value ........................... [RUN]
+[0m12:05:57  7 of 20 PASS not_null_stg_orders_freight_value ................................. [[32mPASS[0m in 0.02s]
+[0m12:05:57  8 of 20 START test not_null_stg_orders_order_id ................................ [RUN]
+[0m12:05:57  8 of 20 PASS not_null_stg_orders_order_id ...................................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  9 of 20 START test not_null_stg_orders_order_item_id ........................... [RUN]
+[0m12:05:57  9 of 20 PASS not_null_stg_orders_order_item_id ................................. [[32mPASS[0m in 0.02s]
+[0m12:05:57  10 of 20 START test not_null_stg_orders_order_item_key ......................... [RUN]
+[0m12:05:57  10 of 20 PASS not_null_stg_orders_order_item_key ............................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  11 of 20 START test not_null_stg_orders_order_purchase_timestamp ............... [RUN]
+[0m12:05:57  11 of 20 PASS not_null_stg_orders_order_purchase_timestamp ..................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  12 of 20 START test not_null_stg_orders_order_status ........................... [RUN]
+[0m12:05:57  12 of 20 PASS not_null_stg_orders_order_status ................................. [[32mPASS[0m in 0.02s]
+[0m12:05:57  13 of 20 START test not_null_stg_orders_price .................................. [RUN]
+[0m12:05:57  13 of 20 PASS not_null_stg_orders_price ........................................ [[32mPASS[0m in 0.02s]
+[0m12:05:57  14 of 20 START test not_null_stg_orders_product_id ............................. [RUN]
+[0m12:05:57  14 of 20 PASS not_null_stg_orders_product_id ................................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  15 of 20 START test not_null_stg_orders_seller_id .............................. [RUN]
+[0m12:05:57  15 of 20 PASS not_null_stg_orders_seller_id .................................... [[32mPASS[0m in 0.02s]
+[0m12:05:57  16 of 20 START test relationships_stg_orders_customer_id__customer_id__source_northmart_raw_dim_customer_  [RUN]
+[0m12:05:57  16 of 20 PASS relationships_stg_orders_customer_id__customer_id__source_northmart_raw_dim_customer_  [[32mPASS[0m in 0.03s]
+[0m12:05:57  17 of 20 START test relationships_stg_orders_date_key__date_key__source_northmart_raw_dim_date_  [RUN]
+[0m12:05:57  17 of 20 PASS relationships_stg_orders_date_key__date_key__source_northmart_raw_dim_date_  [[32mPASS[0m in 0.02s]
+[0m12:05:57  18 of 20 START test relationships_stg_orders_product_id__product_id__source_northmart_raw_dim_product_  [RUN]
+[0m12:05:57  18 of 20 PASS relationships_stg_orders_product_id__product_id__source_northmart_raw_dim_product_  [[32mPASS[0m in 0.03s]
+[0m12:05:57  19 of 20 START test relationships_stg_orders_seller_id__seller_id__source_northmart_raw_dim_seller_  [RUN]
+[0m12:05:57  19 of 20 PASS relationships_stg_orders_seller_id__seller_id__source_northmart_raw_dim_seller_  [[32mPASS[0m in 0.03s]
+[0m12:05:57  20 of 20 START test unique_stg_orders_order_item_key ........................... [RUN]
+[0m12:05:57  20 of 20 PASS unique_stg_orders_order_item_key ................................. [[32mPASS[0m in 0.02s]
+[0m12:05:57  
+[0m12:05:57  Finished running 20 data tests in 0 hours 0 minutes and 0.61 seconds (0.61s).
+[0m12:05:57  
+[0m12:05:57  [32mCompleted successfully[0m
+[0m12:05:57  
+[0m12:05:57  Done. PASS=20 WARN=0 ERROR=0 SKIP=0 NO-OP=0 REUSED=0 TOTAL=20

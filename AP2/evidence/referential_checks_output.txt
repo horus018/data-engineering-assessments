@@ -1,0 +1,14 @@
+============================================================
+         NORTHMART AP2 INDEPENDENT DATA QUALITY SUITE       
+============================================================
+[PASS] test_fk_fact_sales_dim_date: 0 failures
+[PASS] test_fk_fact_sales_dim_product: 0 failures
+[PASS] test_fk_fact_sales_dim_customer: 0 failures
+[PASS] test_fk_fact_sales_dim_seller: 0 failures
+[PASS] test_measure_positive_price_non_neg_freight: 0 failures
+[PASS] test_grain_uniqueness: 0 failures
+[PASS] test_corrupted_day_20180509_blocked_from_marts: 0 failures
+------------------------------------------------------------
+Row counts -> raw_api_orders: 4471 | fact_sales: 4059
+============================================================
+ALL TESTS PASSED! AP2 marts are clean and verified.

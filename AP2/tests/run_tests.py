@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""
-Automated Data Quality & Referential Integrity Test Runner for AP2.
-Runs independent SQL checks outside dbt against AP2/northmart.duckdb.
-"""
+"""Run independent SQL checks outside dbt against AP2/northmart.duckdb."""
 
 from pathlib import Path
 import sys
@@ -20,9 +17,7 @@ def run_tests() -> None:
     test_sql_path = base_dir / "tests" / "test_referential_integrity.sql"
     queries = [q.strip() for q in test_sql_path.read_text(encoding="utf-8").split(";") if q.strip()]
 
-    print("============================================================")
-    print("         NORTHMART AP2 INDEPENDENT DATA QUALITY SUITE       ")
-    print("============================================================")
+    print("Running AP2 independent data quality checks:")
     all_passed = True
     try:
         for q in queries:
@@ -34,17 +29,15 @@ def run_tests() -> None:
 
         fact_cnt = con.execute("SELECT COUNT(*) FROM fact_sales").fetchone()[0]
         raw_cnt = con.execute("SELECT COUNT(*) FROM raw_api_orders").fetchone()[0]
-        print("------------------------------------------------------------")
-        print(f"Row counts -> raw_api_orders: {raw_cnt} | fact_sales: {fact_cnt}")
+        print(f"Row counts: raw_api_orders = {raw_cnt}, fact_sales = {fact_cnt}")
     finally:
         con.close()
 
-    print("============================================================")
     if all_passed:
-        print("ALL TESTS PASSED! AP2 marts are clean and verified.")
+        print("All checks passed.")
         sys.exit(0)
     else:
-        print("TEST FAILURES DETECTED!")
+        print("Some checks failed.")
         sys.exit(1)
 
 

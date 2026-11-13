@@ -1,31 +1,18 @@
 flowchart LR
-    API["Mock REST API<br/>FastAPI :8000<br/>GET /orders?date=...&page=N<br/>(HTTP 503 ~10% of requests)"]
+    API["Mock REST API (:8000)<br/>GET /orders?date=YYYY-MM-DD&page=N"]
 
-    subgraph DAG["Airflow DAG: northmart_ap2_elt_pipeline (daily · 14-day backfill · max_active_runs=1)"]
+    subgraph DAG["Airflow DAG: northmart_ap2_elt_pipeline (daily, 14-day backfill, max_active_runs=1)"]
         direction LR
-        T1["1. extract_orders<br/>PythonOperator<br/>Paginate + Exponential Retry"]
-        T2["2. load_raw_orders<br/>PythonOperator<br/>Atomic DELETE + INSERT"]
-        T3["3. dbt_run_staging<br/>BashOperator<br/>Type, Clean, Cast (stg_orders)"]
-        T4{"4. dbt_test_staging<br/>BashOperator (Gate)<br/>20 Tests: Unique, Not-Null,<br/>FKs, Ranges, Business Rule"}
-        T5["5. dbt_run_marts<br/>BashOperator<br/>Incremental delete+insert<br/>(fact_sales)"]
-        FAIL["Run Fails Safely<br/>downstream skipped<br/>fact_sales untouched"]
+        T1["1. extract_orders<br/>Paginate + HTTP 503 retry"]
+        T2["2. load_raw_orders<br/>Atomic DELETE + INSERT"]
+        T3["3. dbt_run_staging<br/>Cast and clean (stg_orders)"]
+        T4{"4. dbt_test_staging<br/>20 dbt quality tests"}
+        T5["5. dbt_run_marts<br/>Incremental delete+insert<br/>(fact_sales)"]
+        FAIL["Run fails<br/>fact_sales untouched"]
 
         T1 --> T2 --> T3 --> T4
-        T4 -- "20/20 PASS<br/>(13 clean days)" --> T5
-        T4 -- "FAIL (2018-05-09)<br/>4 tests fail" --> FAIL
+        T4 -- "pass (13 days)" --> T5
+        T4 -- "fail (2018-05-09)" --> FAIL
     end
 
-    RAW[("data/raw/YYYY-MM-DD/<br/>page_*.json")]
-    DUCKRAW[("DuckDB: raw_api_orders<br/>+ AP1 dimensions")]
-    STG[("DuckDB: stg_orders")]
-    MARTS[("DuckDB: fact_sales<br/>(4,059 clean rows)")]
-
     API --> T1
-    T1 --> RAW
-    RAW --> T2
-    T2 --> DUCKRAW
-    DUCKRAW --> T3
-    T3 --> STG
-    STG --> T4
-    T5 --> MARTS
-

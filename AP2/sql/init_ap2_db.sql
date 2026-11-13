@@ -1,15 +1,9 @@
--- ============================================================================
 -- NorthMart Data Platform - AP2 Database Initialization
--- Engine: DuckDB
--- Description:
---   Resets the fact table built in AP1 so the AP2 ELT pipeline populates it
---   incrementally from the Mock REST API, and creates the raw landing table.
--- ============================================================================
+-- Resets fact_sales so the AP2 pipeline fills it incrementally from the API,
+-- while keeping the AP1 dimensions intact.
 
--- 1. Empty the PA1/AP1 fact table while keeping dimensions intact
 DELETE FROM fact_sales;
 
--- 2. Reset AP2 staging and raw landing tables
 DROP TABLE IF EXISTS stg_orders;
 DROP TABLE IF EXISTS raw_api_orders;
 
@@ -27,4 +21,3 @@ CREATE TABLE raw_api_orders (
     freight_value DOUBLE,
     ingested_at TIMESTAMP NOT NULL
 );
-

@@ -1,4 +1,4 @@
-# Data Engineering 2026/27 — PA2 (also covers PA1)
+# Data Engineering 2026/27 - AP2 (also covers AP1)
 # Python 3.12, Linux / macOS / WSL2 (Airflow does not run natively on Windows)
 # Install:  python3.12 -m venv .venv && source .venv/bin/activate
 #           pip install -r requirements.txt

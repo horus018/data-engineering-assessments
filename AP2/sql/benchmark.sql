@@ -1,15 +1,11 @@
--- ============================================================================
--- NorthMart Data Platform - PA1 Task 4: Benchmark Queries
+-- NorthMart Data Platform - AP1 Task 4: Benchmark Queries
 -- Engine: DuckDB
 -- Description: Executes the three required analytical queries across 3 storage layouts:
 --   1. Raw CSV Layout (Direct scan & on-the-fly joins over CSV exports)
 --   2. Curated Parquet Unpartitioned (fact_sales.parquet + dimensions)
 --   3. Curated Parquet Partitioned (fact_sales_partitioned by year_month + dimensions)
--- ============================================================================
 
--- ----------------------------------------------------------------------------
 -- LAYOUT 1: RAW CSV QUERIES
--- ----------------------------------------------------------------------------
 
 -- Q1 (CSV): Revenue per month over the whole period
 SELECT 
@@ -44,9 +40,7 @@ ORDER BY total_revenue DESC
 LIMIT 5;
 
 
--- ----------------------------------------------------------------------------
 -- LAYOUT 2: UNPARTITIONED PARQUET QUERIES
--- ----------------------------------------------------------------------------
 
 -- Q1 (Parquet Unpartitioned): Revenue per month over the whole period
 SELECT 
@@ -80,9 +74,7 @@ ORDER BY total_revenue DESC
 LIMIT 5;
 
 
--- ----------------------------------------------------------------------------
 -- LAYOUT 3: PARTITIONED PARQUET QUERIES (Partitioned by year_month)
--- ----------------------------------------------------------------------------
 
 -- Q1 (Parquet Partitioned): Revenue per month over the whole period
 SELECT 

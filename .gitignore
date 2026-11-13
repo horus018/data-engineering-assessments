@@ -41,8 +41,32 @@ build_presentation.py
 # Student oral defense preparation guides & demo scripts (not submitted)
 STUDY_GUIDE.md
 VIDEO_SCRIPT.md
-**/STUDY_GUIDE.md
-**/VIDEO_SCRIPT.md
+**/STUDY_GUIDE*.md
+**/AUDIT_REPORT*.md
+**/VIDEO_SCRIPT*.md
+**/DEFENSE_GUIDE*.md
+
+# dbt generated artifacts
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/.user.yml
+**/dbt/target/
+**/dbt/logs/
+**/dbt/dbt_packages/
+**/.user.yml
+
+# Airflow runtime state & logs
+airflow/logs/
+airflow/airflow.db*
+airflow/airflow.cfg
+airflow/webserver_config.py
+airflow/simple_auth_manager_passwords.json*
+**/airflow/logs/
+**/airflow/airflow.db*
+**/airflow/airflow.cfg
+**/airflow/webserver_config.py
+**/airflow/simple_auth_manager_passwords.json*
 
 # Packaging and submission zips
 *.zip

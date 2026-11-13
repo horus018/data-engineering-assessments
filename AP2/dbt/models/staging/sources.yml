@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: northmart_raw
+    schema: main
+    description: "DuckDB tables populated by AP1 dimensions and AP2 API raw landing."
+    tables:
+      - name: raw_api_orders
+        description: "Raw order items landed from the NorthMart REST API."
+      - name: dim_date
+        description: "Conformed calendar dimension built in AP1."
+      - name: dim_product
+        description: "Conformed product dimension built in AP1."
+      - name: dim_customer
+        description: "Conformed customer dimension built in AP1."
+      - name: dim_seller
+        description: "Conformed seller dimension built in AP1."
+

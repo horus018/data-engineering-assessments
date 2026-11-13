@@ -1,0 +1,27 @@
+name: 'northmart'
+version: '1.0.0'
+config-version: 2
+
+profile: 'northmart'
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  batch_date: null
+
+models:
+  northmart:
+    staging:
+      +materialized: table
+    marts:
+      +materialized: incremental
+

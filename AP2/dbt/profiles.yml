@@ -1,0 +1,8 @@
+northmart:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('NORTHMART_DUCKDB_PATH', '../northmart.duckdb') }}"
+      threads: 1
+

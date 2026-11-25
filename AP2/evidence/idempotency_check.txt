@@ -1,0 +1,13 @@
+=== BEFORE RE-RUN (2018-05-01) ===
+raw_api_orders total       : 4471
+raw_api_orders 2018-05-01  : 277
+fact_sales total           : 4059
+fact_sales 20180501        : 277
+fact_sales revenue total   : 516868.71
+
+=== AFTER RE-RUN (2018-05-01) ===
+raw_api_orders total       : 4471
+raw_api_orders 2018-05-01  : 277
+fact_sales total           : 4059
+fact_sales 20180501        : 277
+fact_sales revenue total   : 516868.71

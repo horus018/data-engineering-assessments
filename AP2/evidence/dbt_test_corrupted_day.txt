@@ -1,0 +1,72 @@
+[0m12:05:45  Running with dbt=1.12.6
+[0m12:05:46  Registered adapter: duckdb=1.11.1
+[0m12:05:46  Found 2 models, 20 data tests, 5 sources, 512 macros
+[0m12:05:46  
+[0m12:05:46  Concurrency: 1 threads (target='dev')
+[0m12:05:46  
+[0m12:05:46  1 of 20 START test accepted_range_stg_orders_freight_value__10000_0__0_0 ....... [RUN]
+[0m12:05:46  1 of 20 PASS accepted_range_stg_orders_freight_value__10000_0__0_0 ............. [[32mPASS[0m in 0.05s]
+[0m12:05:46  2 of 20 START test accepted_range_stg_orders_price__50000_0__0_01 .............. [RUN]
+[0m12:05:46  2 of 20 FAIL 15 accepted_range_stg_orders_price__50000_0__0_01 ................. [[31mFAIL 15[0m in 0.02s]
+[0m12:05:46  3 of 20 START test accepted_values_stg_orders_order_status__delivered__shipped__canceled__invoiced__processing__created__approved__unavailable  [RUN]
+[0m12:05:46  3 of 20 PASS accepted_values_stg_orders_order_status__delivered__shipped__canceled__invoiced__processing__created__approved__unavailable  [[32mPASS[0m in 0.05s]
+[0m12:05:46  4 of 20 START test assert_valid_marketplace_order_economics .................... [RUN]
+[0m12:05:46  4 of 20 FAIL 12 assert_valid_marketplace_order_economics ....................... [[31mFAIL 12[0m in 0.02s]
+[0m12:05:46  5 of 20 START test not_null_stg_orders_customer_id ............................. [RUN]
+[0m12:05:46  5 of 20 FAIL 10 not_null_stg_orders_customer_id ................................ [[31mFAIL 10[0m in 0.03s]
+[0m12:05:46  6 of 20 START test not_null_stg_orders_date_key ................................ [RUN]
+[0m12:05:46  6 of 20 PASS not_null_stg_orders_date_key ...................................... [[32mPASS[0m in 0.02s]
+[0m12:05:46  7 of 20 START test not_null_stg_orders_freight_value ........................... [RUN]
+[0m12:05:46  7 of 20 PASS not_null_stg_orders_freight_value ................................. [[32mPASS[0m in 0.02s]
+[0m12:05:46  8 of 20 START test not_null_stg_orders_order_id ................................ [RUN]
+[0m12:05:46  8 of 20 PASS not_null_stg_orders_order_id ...................................... [[32mPASS[0m in 0.02s]
+[0m12:05:46  9 of 20 START test not_null_stg_orders_order_item_id ........................... [RUN]
+[0m12:05:46  9 of 20 PASS not_null_stg_orders_order_item_id ................................. [[32mPASS[0m in 0.02s]
+[0m12:05:46  10 of 20 START test not_null_stg_orders_order_item_key ......................... [RUN]
+[0m12:05:46  10 of 20 PASS not_null_stg_orders_order_item_key ............................... [[32mPASS[0m in 0.02s]
+[0m12:05:46  11 of 20 START test not_null_stg_orders_order_purchase_timestamp ............... [RUN]
+[0m12:05:46  11 of 20 PASS not_null_stg_orders_order_purchase_timestamp ..................... [[32mPASS[0m in 0.02s]
+[0m12:05:46  12 of 20 START test not_null_stg_orders_order_status ........................... [RUN]
+[0m12:05:46  12 of 20 PASS not_null_stg_orders_order_status ................................. [[32mPASS[0m in 0.02s]
+[0m12:05:46  13 of 20 START test not_null_stg_orders_price .................................. [RUN]
+[0m12:05:47  13 of 20 PASS not_null_stg_orders_price ........................................ [[32mPASS[0m in 0.02s]
+[0m12:05:47  14 of 20 START test not_null_stg_orders_product_id ............................. [RUN]
+[0m12:05:47  14 of 20 PASS not_null_stg_orders_product_id ................................... [[32mPASS[0m in 0.02s]
+[0m12:05:47  15 of 20 START test not_null_stg_orders_seller_id .............................. [RUN]
+[0m12:05:47  15 of 20 PASS not_null_stg_orders_seller_id .................................... [[32mPASS[0m in 0.02s]
+[0m12:05:47  16 of 20 START test relationships_stg_orders_customer_id__customer_id__source_northmart_raw_dim_customer_  [RUN]
+[0m12:05:47  16 of 20 PASS relationships_stg_orders_customer_id__customer_id__source_northmart_raw_dim_customer_  [[32mPASS[0m in 0.04s]
+[0m12:05:47  17 of 20 START test relationships_stg_orders_date_key__date_key__source_northmart_raw_dim_date_  [RUN]
+[0m12:05:47  17 of 20 PASS relationships_stg_orders_date_key__date_key__source_northmart_raw_dim_date_  [[32mPASS[0m in 0.03s]
+[0m12:05:47  18 of 20 START test relationships_stg_orders_product_id__product_id__source_northmart_raw_dim_product_  [RUN]
+[0m12:05:47  18 of 20 PASS relationships_stg_orders_product_id__product_id__source_northmart_raw_dim_product_  [[32mPASS[0m in 0.03s]
+[0m12:05:47  19 of 20 START test relationships_stg_orders_seller_id__seller_id__source_northmart_raw_dim_seller_  [RUN]
+[0m12:05:47  19 of 20 PASS relationships_stg_orders_seller_id__seller_id__source_northmart_raw_dim_seller_  [[32mPASS[0m in 0.03s]
+[0m12:05:47  20 of 20 START test unique_stg_orders_order_item_key ........................... [RUN]
+[0m12:05:47  20 of 20 FAIL 20 unique_stg_orders_order_item_key .............................. [[31mFAIL 20[0m in 0.02s]
+[0m12:05:47  
+[0m12:05:47  Finished running 20 data tests in 0 hours 0 minutes and 0.64 seconds (0.64s).
+[0m12:05:47  
+[0m12:05:47  [31mCompleted with 4 errors, 0 partial successes, and 0 warnings:[0m
+[0m12:05:47  
+[0m12:05:47  [[31mERROR[0m]: in test accepted_range_stg_orders_price__50000_0__0_01 (models/staging/schema.yml)
+[0m12:05:47    Got 15 results, configured to fail if != 0
+[0m12:05:47  
+[0m12:05:47    compiled code at target/compiled/northmart/models/staging/schema.yml/accepted_range_stg_orders_price__50000_0__0_01.sql
+[0m12:05:47  
+[0m12:05:47  [[31mERROR[0m]: in test assert_valid_marketplace_order_economics (tests/assert_valid_marketplace_order_economics.sql)
+[0m12:05:47    Got 12 results, configured to fail if != 0
+[0m12:05:47  
+[0m12:05:47    compiled code at target/compiled/northmart/tests/assert_valid_marketplace_order_economics.sql
+[0m12:05:47  
+[0m12:05:47  [[31mERROR[0m]: in test not_null_stg_orders_customer_id (models/staging/schema.yml)
+[0m12:05:47    Got 10 results, configured to fail if != 0
+[0m12:05:47  
+[0m12:05:47    compiled code at target/compiled/northmart/models/staging/schema.yml/not_null_stg_orders_customer_id.sql
+[0m12:05:47  
+[0m12:05:47  [[31mERROR[0m]: in test unique_stg_orders_order_item_key (models/staging/schema.yml)
+[0m12:05:47    Got 20 results, configured to fail if != 0
+[0m12:05:47  
+[0m12:05:47    compiled code at target/compiled/northmart/models/staging/schema.yml/unique_stg_orders_order_item_key.sql
+[0m12:05:47  
+[0m12:05:47  Done. PASS=16 WARN=0 ERROR=4 SKIP=0 NO-OP=0 REUSED=0 TOTAL=20

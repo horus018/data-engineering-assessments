@@ -4,6 +4,14 @@
 **Academic Year**: 2026/2027  
 **Course**: Data Engineering  
 
+### Group Members
+
+| Name | Student Number |
+| :--- | :--- |
+| Lucas Alves Rubira | a67707 |
+| Dorota Dudkowiak | m324637 |
+| Aye Khine Lwin | a70733 |
+
 ---
 
 ## Repository Overview

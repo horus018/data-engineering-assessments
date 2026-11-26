@@ -1,0 +1,14 @@
+================================================================================
+NORTHMART PA3 — AUTOMATED INTEGRITY & GDPR PRIVACY VERIFICATION SUITE
+================================================================================
+Check Name                                             | Violations | Status  
+--------------------------------------------------------------------------------
+1. FK fact_sales -> dim_date                           |          0 | PASSED  
+2. FK fact_sales -> dim_product                        |          0 | PASSED  
+3. FK fact_sales -> dim_customer                       |          0 | PASSED  
+4. FK fact_sales -> dim_seller                         |          0 | PASSED  
+5. GDPR Keyed SHA-256 Hash on dim_customer.customer_id |          0 | PASSED  
+6. GDPR Location Generalization on dim_customer        |          0 | PASSED  
+7. GDPR Free-Text Excluded from stg_reviews            |          0 | PASSED  
+8. GDPR Art. 17 Customer Erased Across All Layers      |          0 | PASSED  
+================================================================================

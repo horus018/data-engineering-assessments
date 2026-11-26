@@ -1,0 +1,22 @@
+==========================================================================================
+NORTHMART PA3 — TASK 3: GDPR RIGHT TO ERASURE (ART. 17) BEFORE vs. AFTER EVIDENCE
+==========================================================================================
+Requested Customer Identifier (raw)   : d1806517abdeab70d77e1ff58ec5f1b8
+Associated customer_unique_id(s)      : e8d7e19524297d8d550594ba07bb139b
+Keyed SHA-256 Hash (in dbt marts)     : 92455103b9a4ef10ad02498d0f7d72dfd69d47c6e1a7fb8dc2247636d095403c
+Resolved Surrogate customer_key(s)    : [57079]
+------------------------------------------------------------------------------------------
+Storage Layer / Table                          | Customer (Before -> After) | Total Rows (Before -> After)
+------------------------------------------------------------------------------------------
+1. data/raw/*.json (Landed API JSON files)     | 3 -> 0                     | 4,471 -> 4,468 (-3)
+2. raw_api_orders (DuckDB Raw API table)       | 3 -> 0                     | 4,471 -> 4,468 (-3)
+3. raw_customers (DuckDB Raw Customers)        | 1 -> 0                     | 99,441 -> 99,440 (-1)
+4. raw_orders (DuckDB Raw Orders)              | 1 -> 0                     | 99,441 -> 99,440 (-1)
+5. stg_orders (dbt Staging table)              | 3 -> 0                     | 277 -> 274 (-3)
+6. dim_customer (dbt Protected Mart Dimension) | 1 -> 0                     | 99,441 -> 99,440 (-1)
+7. fact_sales (dbt Incremental Mart Fact)      | 3 -> 0                     | 4,059 -> 4,056 (-3)
+8. data/curated/fact_sales.parquet             | 3 -> 0                     | 4,059 -> 4,056 (-3)
+9. data/curated/fact_sales_partitioned/        | 3 -> 0                     | 4,059 -> 4,056 (-3)
+------------------------------------------------------------------------------------------
+VERIFICATION: 0 records for the erased customer remain in any raw, staging, mart, or Parquet layer.
+==========================================================================================

@@ -1,0 +1,4 @@
+query,duckdb_cold_ms,duckdb_warm_ms,spark_p200_cold_ms,spark_p200_warm_ms,spark_p4_cold_ms,spark_p4_warm_ms,speedup_duckdb_vs_spark_p4_warm
+Q1_monthly_revenue,7.42,5.49,2713.83,299.64,386.44,205.73,37.5x
+Q2_single_month_2018_05,4.83,4.65,346.06,160.00,160.51,140.77,30.2x
+Q3_top5_product_categories,18.14,13.52,694.50,304.06,339.51,267.80,19.8x

@@ -1,0 +1,38 @@
+source_table,field_name,classification,action_in_marts,purpose,retention_period
+raw_customers,customer_id,identifier,Keyed SHA-256 hash (NORTHMART_HASH_KEY),Join orders to dim_customer without raw ID,5 years (or immediate upon GDPR Art. 17 erasure)
+raw_customers,customer_unique_id,identifier,Keyed SHA-256 hash (NORTHMART_HASH_KEY),Repeat-purchase and customer cohort analysis,5 years (or immediate upon GDPR Art. 17 erasure)
+raw_customers,customer_zip_code_prefix,quasi-identifier,Generalize to 2-digit region (NNXXX),Macro-regional freight zone analytics,5 years (erased upon GDPR request)
+raw_customers,customer_city,quasi-identifier,Drop / Redact ('REDACTED'),Removed to prevent small-town re-identification,30 days in raw only; 0 days in marts
+raw_customers,customer_state,quasi-identifier,Keep generalized (2-letter state),State-level sales revenue reporting,5 years (erased upon GDPR request)
+raw_orders,order_id,quasi-identifier,Keep (dissociated from raw customer_id),Composite grain (order_id + order_item_id),5 years (erased if linked customer requests GDPR erasure)
+raw_orders,order_item_id,non-personal,Keep,Line item sequence number within order,5 years
+raw_orders,customer_id,identifier,Keyed SHA-256 hash in stg_orders -> customer_key in fact_sales,Foreign key resolution to dim_customer,30 days in raw; hashed in staging; erased upon GDPR request
+raw_orders,product_id,non-personal,Keep -> product_key in fact_sales,Product and category sales analysis,Indefinite (non-personal catalog data)
+raw_orders,seller_id,identifier,Keep -> seller_key in fact_sales,Merchant revenue attribution,5 years after seller contract termination
+raw_orders,order_status,non-personal,Keep (normalized lowercase),Order lifecycle filtering,5 years
+raw_orders,order_purchase_timestamp,quasi-identifier,Generalize to daily date_key (YYYYMMDD) and year_month in fact_sales,Daily and monthly revenue trends,30 days timestamp in staging; 5 years as date_key in marts
+raw_orders,order_approved_at,quasi-identifier,Drop (not loaded into marts),Not needed for sales star schema,30 days in raw layer only
+raw_orders,order_delivered_carrier_date,quasi-identifier,Drop (not loaded into marts),Not needed for sales star schema,30 days in raw layer only
+raw_orders,order_delivered_customer_date,quasi-identifier,Drop (not loaded into marts),Not needed for sales star schema,30 days in raw layer only
+raw_orders,order_estimated_delivery_date,non-personal,Drop (not loaded into marts),Not needed for sales star schema,30 days in raw layer only
+raw_orders,price,non-personal,Keep (DOUBLE),Gross item revenue measure,5 years
+raw_orders,freight_value,non-personal,Keep (DOUBLE),Shipping fee measure,5 years
+raw_sellers_json,seller_id,identifier,Keep -> seller_key in dim_seller,Join sales items to seller dimension,5 years after seller contract ends
+raw_sellers_json,contact.email,identifier,Drop (never loaded into dim_seller),Direct PII - excluded from analytical marts,0 days in analytical layer
+raw_sellers_json,contact.phone,identifier,Drop (never loaded into dim_seller),Direct PII - excluded from analytical marts,0 days in analytical layer
+raw_sellers_json,seller_zip_code_prefix,quasi-identifier,Keep (commercial warehouse prefix),Freight origin analysis,5 years
+raw_sellers_json,seller_city,quasi-identifier,Keep (commercial warehouse city),Merchant geographic distribution,5 years
+raw_sellers_json,seller_state,quasi-identifier,Keep (2-letter state),State-level merchant supply analysis,5 years
+raw_sellers_json,profile.tier,non-personal,Keep (normalized lowercase),Revenue breakdown by seller tier,5 years
+raw_sellers_json,profile.joined_on,quasi-identifier,Keep (DATE),Seller tenure analysis,5 years
+raw_sellers_json,shipping.handling_days,non-personal,Keep (INTEGER),Warehouse handling SLA analysis,5 years
+raw_sellers_json,shipping.carriers,non-personal,Drop,Not required in order-item star schema,30 days in raw layer
+raw_sellers_json,updated_at,non-personal,Used only for deduplication in staging,Select latest seller snapshot,30 days in raw layer
+raw_order_reviews,review_id,non-personal,Keep in stg_reviews,Primary key of structured review rating,2 years
+raw_order_reviews,order_id,quasi-identifier,Keep in stg_reviews,Link review score to order,2 years (erased upon GDPR request)
+raw_order_reviews,review_score,non-personal,Keep (1-5 integer),Customer satisfaction KPI,5 years
+raw_order_reviews,review_comment_title,quasi-identifier,DROP (free text excluded from marts),Excluded: unstructured free text can contain PII,0 days in analytical layer
+raw_order_reviews,review_comment_message,quasi-identifier,DROP (free text excluded from marts),Excluded: unstructured free text can contain PII,0 days in analytical layer
+raw_order_reviews,review_creation_date,quasi-identifier,Keep (TIMESTAMP),Satisfaction trend over time,2 years
+raw_order_reviews,review_answer_timestamp,non-personal,Keep (TIMESTAMP),Support response SLA analysis,2 years
+

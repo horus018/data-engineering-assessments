@@ -1,0 +1,38 @@
+# Data source files and raw pipeline landings (never commit per brief)
+data/source/
+data/raw/
+*.duckdb
+*.duckdb.wal
+
+# Environment and secrets (hashing key kept outside repository)
+.env
+*.env
+
+# Python & Spark artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+venv/
+.venv/
+spark-warehouse/
+derby.log
+metastore_db/
+
+# dbt generated artifacts
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+dbt/.user.yml
+
+# Airflow runtime state & logs
+airflow/logs/
+airflow/airflow.db*
+airflow/airflow.cfg
+airflow/webserver_config.py
+airflow/simple_auth_manager_passwords.json*
+
+# Student study guides & video files
+STUDY_GUIDE*.md
+*.mp4
+*.zip
+

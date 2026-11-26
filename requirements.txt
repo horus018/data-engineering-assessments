@@ -1,15 +1,12 @@
-# Data Engineering 2026/27 - AP2 (also covers AP1)
-# Python 3.12, Linux / macOS / WSL2 (Airflow does not run natively on Windows)
-# Install:  python3.12 -m venv .venv && source .venv/bin/activate
-#           pip install -r requirements.txt
-# Do NOT add Airflow's official constraints file: it conflicts with dbt-core.
-
-apache-airflow==3.3.2
 duckdb==2.0.0
-dbt-core==1.12.6
-dbt-duckdb==1.11.1
-fastapi==0.136.3
-uvicorn==0.54.0
-requests==2.34.2
-pandas==3.1.0
-pyarrow==26.0.1
+pandas==2.2.3
+pyarrow==19.0.1
+matplotlib==3.10.1
+Pillow==11.1.0
+fastapi==0.136.0
+uvicorn==0.44.0
+requests==2.32.3
+dbt-core==1.11.7
+dbt-duckdb==1.10.1
+apache-airflow==3.3.2
+pyspark==4.3.0

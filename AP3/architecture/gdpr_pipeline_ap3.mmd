@@ -1,0 +1,35 @@
+flowchart LR
+    ENV[".env (Outside Git)<br/>NORTHMART_HASH_KEY"]
+
+    subgraph RAW["Raw Layer (DuckDB & Disk)"]
+        direction TB
+        R1["data/raw/YYYY-MM-DD/*.json<br/>raw_api_orders"]
+        R2["raw_customers & raw_orders"]
+        R3["raw_order_reviews<br/>(contains free-text comments)"]
+    end
+
+    subgraph DBT["dbt Protection & Quality Gate (Part A Task 2)"]
+        direction TB
+        S1["stg_customers -> dim_customer<br/>sha256(KEY || customer_id)<br/>zip: NNXXX, city: REDACTED"]
+        S2["stg_orders<br/>sha256(KEY || customer_id)"]
+        S3["stg_reviews<br/>Drops review_comment_title<br/>& review_comment_message"]
+        T1{"dbt test<br/>Quality + FK Gate"}
+    end
+
+    subgraph MARTS["Safe Marts & Curated Parquet"]
+        direction TB
+        M1["fact_sales (Incremental)<br/>Surrogate customer_key only"]
+        M2["data/curated/<br/>fact_sales.parquet & partitioned"]
+    end
+
+    subgraph ERASE["GDPR Art. 17 Erasure (Part A Task 3)"]
+        E1["erase_customer.py + erase_customer.sql<br/>Scrubs Raw JSON + Raw Tables +<br/>Staging + Marts + Parquet"]
+    end
+
+    ENV -.-> S1 & S2 & E1
+    R1 --> S2
+    R2 --> S1
+    R3 --> S3
+    S1 & S2 --> T1
+    T1 -- "Pass" --> M1 --> M2
+    E1 ==> R1 & R2 & S1 & M1 & M2

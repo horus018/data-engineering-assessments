@@ -1,70 +1,40 @@
-# Data Engineering Practical Assessments (2026/2027)
+# NorthMart Data Platform — Data Engineering (2026/2027)
 
-**Institution**: Universidade Politecnica de Braganca (UPB)  
-**Academic Year**: 2026/2027  
-**Course**: Data Engineering  
+**Group 4 Members:**
+- **Lucas Alves Rubira** (`a67707`)
+- **Dorota Dudkowiak** (`m324637`)
+- **Aye Khine Lwin** (`a70733`)
 
-### Group Members
-
-| Name | Student Number |
-| :--- | :--- |
-| Lucas Alves Rubira | a67707 |
-| Dorota Dudkowiak | m324637 |
-| Aye Khine Lwin | a70733 |
+---
 
 ## Repository Structure
 
-- `AP1/`: Assessment 1 (Storage formats, data profiling, Kimball star schema in DuckDB, and Parquet benchmarks)
-  - `AP1/README.md`: Documentation and written answers for AP1
-  - `AP1/sql/`: `profiling.sql`, `build_model.sql`, `benchmark.sql`
-  - `AP1/src/`: Benchmark runner and diagram scripts
-  - `AP1/tests/`: SQL referential integrity checks
-  - `AP1/evidence/`: Profiling and benchmark outputs
-- `AP2/`: Assessment 2 (Orchestrated and tested ELT pipeline with FastAPI, DuckDB, dbt, and Airflow)
-  - `AP2/README.md`: Documentation, architecture diagram, and answers to Tasks 1 to 6
-  - `AP2/mock_api.py`: Mock NorthMart orders REST API (`:8000`)
-  - `AP2/src/`: `init_db.py`, `extract_orders.py`, `load_raw.py`, `generate_diagram.py`
-  - `AP2/dbt/`: Staging model (`stg_orders`), 20 quality tests, and incremental mart (`fact_sales`)
-  - `AP2/airflow/dags/`: `northmart_elt_dag.py` (daily schedule, 14-day backfill, `max_active_runs=1`)
-  - `AP2/tests/`: Independent SQL verification suite (`run_tests.py`)
-  - `AP2/evidence/`: Airflow Grid View screenshot, dbt test logs, idempotency check, and task durations
-- `AP3/`: Assessment 3 (Upcoming)
-- `requirements.txt`: Pinned Python 3.12 dependencies for AP1 and AP2
+This repository contains all three Practical Assessments for the NorthMart Data Platform:
+- **[AP1/](AP1/README.md) — Practical Assessment 1:** Raw Data Profiling, Kimball Star Schema in DuckDB, and CSV vs. Parquet Storage Benchmarks.
+- **[AP2/](AP2/README.md) — Practical Assessment 2:** Orchestrated and Tested Daily ELT Pipeline (FastAPI Mock REST API, Idempotent DuckDB Raw Loader, `dbt` Staging & Incremental Fact Table, 20 Quality Gate Tests, and Apache Airflow DAG).
+- **[AP3/](AP3/README.md) — Practical Assessment 3:** GDPR Data Protection (Personal Data Inventory, Keyed SHA-256 Hashing & Location Generalization in `dbt`, GDPR Art. 17 Multi-Layer Customer Erasure) and Emerging Tool Exploration (Apache Spark / PySpark vs. DuckDB Benchmark).
 
-## Assessment Summary
+---
 
-| Assessment | Topic | Status | Weight |
-| :--- | :--- | :--- | :--- |
-| AP1 | Storage Formats and Analytical Modelling (DuckDB, Parquet, Star Schema) | Completed | 20% |
-| AP2 | Orchestrated and Tested ELT Pipeline (REST API, dbt, Airflow) | Completed | 20% |
-| AP3 | Data Protection and Tool Exploration | Upcoming | 20% |
-
-## Quick Start (AP2)
+## Quick Reproduction Guide for PA3 (`AP3/`)
 
 ```bash
-# 1. Create Python 3.12 virtual environment and install dependencies
-python3.12 -m venv .venv
-source .venv/bin/activate
-pip install -r AP2/requirements.txt
+cd AP3
+source ../.venv/bin/activate
+export NORTHMART_HASH_KEY="northmart_gdpr_secret_key_2026"
 
-# 2. Initialize fresh AP2 DuckDB database (AP1 dimensions intact, fact_sales empty)
-cd AP2
-python src/init_db.py --rebuild
+# 1. Initialize database, build protected dbt models, and backfill May 2018
+python src/init_db.py --rebuild --backfill
 
-# 3. Start the Mock API (Terminal 1)
-uvicorn mock_api:app --port 8000
+# 2. Execute GDPR Art. 17 customer erasure across all layers (raw JSON, raw tables, staging, marts, Parquet)
+python src/erase_customer.py --customer-id d1806517abdeab70d77e1ff58ec5f1b8
 
-# 4. Start Airflow (Terminal 2)
-export AIRFLOW_HOME="$(pwd)/airflow"
-export AIRFLOW__CORE__DAGS_FOLDER="$(pwd)/airflow/dags"
-export AIRFLOW__CORE__LOAD_EXAMPLES=False
-airflow db migrate && airflow standalone
-
-# 5. Unpause the DAG to run the 14-day backfill (Terminal 3)
-airflow dags unpause northmart_ap2_elt_pipeline
-
-# 6. Run independent SQL verification checks
+# 3. Run automated 8-check referential integrity & GDPR verification suite
 python tests/run_tests.py
+
+# 4. Run Part B Apache Spark minimal working example and Spark vs. DuckDB experiment
+python exploration/spark_working_example.py
+python exploration/spark_vs_duckdb_experiment.py
 ```
 
-See [AP1/README.md](AP1/README.md) and [AP2/README.md](AP2/README.md) for full details.
+For full written answers to **PA3 Tasks 1–6**, see **[AP3/README.md](AP3/README.md)**.

@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: northmart_raw
+    description: "DuckDB raw landing tables and static PA1 dimensions."
+    schema: main
+    tables:
+      - name: raw_api_orders
+        description: "Raw order items ingested daily from the NorthMart REST API."
+      - name: raw_customers
+        description: "Raw customer records from Olist export before keyed hashing and location generalization."
+      - name: raw_order_reviews
+        description: "Raw order reviews (free-text comment fields must never enter marts)."
+      - name: dim_date
+        description: "Calendar date dimension built in PA1."
+      - name: dim_product
+        description: "Product dimension built in PA1."
+      - name: dim_seller
+        description: "Seller dimension built in PA1 (without seller email/phone PII)."
+

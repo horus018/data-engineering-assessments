@@ -1,0 +1,123 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "GDPR-protected customer dimension with keyed SHA-256 identifier hashes and generalized location."
+    columns:
+      - name: customer_key
+        description: "Customer surrogate primary key."
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Keyed SHA-256 hash of customer_id."
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_unique_id
+        description: "Keyed SHA-256 hash of customer_unique_id."
+        data_tests:
+          - not_null
+      - name: zip_code_prefix
+        description: "Generalized 2-digit postal region (e.g. '75XXX')."
+        data_tests:
+          - not_null
+      - name: state
+        description: "2-letter state code for regional analytics."
+        data_tests:
+          - not_null
+
+  - name: stg_orders
+    description: "Typed, cleaned, and pseudonymized daily order items staged from raw_api_orders."
+    columns:
+      - name: order_item_key
+        description: "Composite grain key (order_id + '-' + order_item_id)."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: "Order natural identifier."
+        data_tests:
+          - not_null
+
+      - name: order_item_id
+        description: "Line item sequence number within the order."
+        data_tests:
+          - not_null
+
+      - name: customer_id
+        description: "Keyed SHA-256 hash of order customer token."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+
+      - name: product_id
+        description: "Product identifier."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('northmart_raw', 'dim_product')
+                field: product_id
+
+      - name: seller_id
+        description: "Seller identifier."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('northmart_raw', 'dim_seller')
+                field: seller_id
+
+      - name: date_key
+        description: "Purchase date surrogate key (YYYYMMDD)."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: source('northmart_raw', 'dim_date')
+                field: date_key
+
+      - name: order_status
+        description: "Normalized lowercase order lifecycle status."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - delivered
+                  - shipped
+                  - canceled
+                  - invoiced
+                  - processing
+                  - created
+                  - approved
+                  - unavailable
+
+      - name: order_purchase_timestamp
+        description: "Order purchase timestamp."
+        data_tests:
+          - not_null
+
+      - name: price
+        description: "Item sale price (must be strictly positive)."
+        data_tests:
+          - not_null
+          - accepted_range:
+              arguments:
+                min_value: 0.01
+                max_value: 50000.00
+
+      - name: freight_value
+        description: "Item shipping fee (must be non-negative)."
+        data_tests:
+          - not_null
+          - accepted_range:
+              arguments:
+                min_value: 0.00
+                max_value: 10000.00
+

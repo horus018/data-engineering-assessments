@@ -1,0 +1,18 @@
+==========================================================================================
+NORTHMART PA3 — TASK 2: PROTECTED CUSTOMER DIMENSION (dim_customer) SAMPLE
+==========================================================================================
+Protection rules applied in dbt (stg_customers -> dim_customer):
+  1. customer_id        : Keyed SHA-256 hash using env_var("NORTHMART_HASH_KEY")
+  2. customer_unique_id : Keyed SHA-256 hash using env_var("NORTHMART_HASH_KEY")
+  3. zip_code_prefix    : Generalized from 5 digits to 2-digit postal region (NNXXX)
+  4. city               : Masked to REDACTED (prevents small-town re-identification)
+  5. state              : Kept at 2-letter state level for regional analytics
+------------------------------------------------------------------------------------------
+key=1     | id_hash=00013a0527103ea27e... | unique_hash=588cf64a086416aa40... | zip=93XXX | city=REDACTED | state=RS
+key=2     | id_hash=0002ababd98e6e47b6... | unique_hash=f419ad72d127285c0c... | zip=39XXX | city=REDACTED | state=MG
+key=3     | id_hash=00038c57e01d52c655... | unique_hash=c712d1720f603bc918... | zip=39XXX | city=REDACTED | state=MG
+key=4     | id_hash=0003948c39065303a8... | unique_hash=87052e9a6dc5c213f4... | zip=95XXX | city=REDACTED | state=RS
+key=5     | id_hash=000467cc6b0d64afa6... | unique_hash=7e2e43d69b747f3b14... | zip=13XXX | city=REDACTED | state=SP
+------------------------------------------------------------------------------------------
+stg_reviews columns (free-text comments excluded): ['review_id', 'order_id', 'review_score', 'review_creation_date', 'review_answer_timestamp']
+==========================================================================================
